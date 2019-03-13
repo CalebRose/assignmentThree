@@ -1,5 +1,5 @@
 /*
-    Word Guessing Game
+    HangMan Game
 
     Requirements:
     Theme
@@ -21,11 +21,11 @@
                 if(lettercounter == word.length{
                     lifecounter--;
                     chancesLeft--;
-                    (if using buttons, disable the letter)
                     letterCounter = 0;
                 }
             }
         }
+        (if using buttons, disable the letter)
         if(currentWord == word){
             // Change Page to say You Win!
             // Offer chance to play again.
