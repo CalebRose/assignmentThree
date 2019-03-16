@@ -34,4 +34,74 @@
             // Change Document to say Game Over!
         }
     }
+
+
+    document.write() can be used to write all of the code onto the page.
 */
+
+var displayGuessTag = document.getElementById("displayGuess");
+var wordUsed = document.getElementById("wordUsed");
+var displayTries = document.getElementById("displayTries");
+var displayLetters = document.getElementById("lettersUsed");
+var wordsArray = ["coffee"];
+var pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
+var guess = "";
+var tries = 0;
+var lettersGuessed = [];
+var guessCounter = 0;
+let selectedKey = "";
+
+setUpGame();
+
+function setUpGame() {
+    for (var i = 0; i < pickedWord.length; i++) {
+        guess += "_";
+    }
+    tries = 8;
+    displayTries.textContent = tries.toString();
+    lettersGuessed = [];
+    displayGuessTag.textContent = guess;
+    displayLetters.textContent = lettersGuessed;
+}
+
+function replaceChar(str, index, chr) {
+    str = str.split('');
+    str[index] = chr;
+    str = str.join('');
+    return str;
+}
+
+document.onkeyup = function (event) {
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+        selectedKey = event.key;
+        if (lettersGuessed.includes(selectedKey)) {
+            console.log("You cannot send " + selectedKey + " because it has already been used");
+            return; // I can either change this to a !not and include the rest of the function in here, or leave as is.
+        }
+        for (var i = 0; i < pickedWord.length; i++) {
+            if (selectedKey == pickedWord[i]) {
+                guess = replaceChar(guess, i, selectedKey);
+            } else {
+                guessCounter++;
+                if (guessCounter == pickedWord.length) {
+                    tries--;
+                }
+            }
+        }
+        guessCounter = 0;
+        displayGuessTag.textContent = guess;
+        displayTries.textContent = tries.toString();
+        if (!lettersGuessed.includes(selectedKey)) {
+            lettersGuessed = lettersGuessed.shift(selectedKey);
+        }
+        displayLetters.textContent = lettersGuessed;
+    }
+}
+
+function winCondition() {
+
+}
+
+function loseCondition() {
+
+}
