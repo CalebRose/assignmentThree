@@ -43,7 +43,23 @@ var displayGuessTag = document.getElementById("displayGuess");
 var wordUsed = document.getElementById("wordUsed");
 var displayTries = document.getElementById("displayTries");
 var displayLetters = document.getElementById("lettersUsed");
-var wordsArray = ["coffee"];
+var wordsArray = [
+  "Austin",
+  "Moscow",
+  "Paris",
+  "London",
+  "Minneapolis",
+  "Chicago",
+  "Barcelona",
+  "Berlin",
+  "Toronto",
+  "Tokyo",
+  "Vienna",
+  "Istanbul",
+  "Beijing",
+  "Seoul",
+  "Waco"
+];
 var pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
 var guess = "";
 var tries = 0;
@@ -55,9 +71,11 @@ setUpGame();
 
 function setUpGame() {
   for (var i = 0; i < pickedWord.length; i++) {
-    guess += "_";
+    if (pickedWord[i] == " ") {
+      guess += " ";
+    } else guess += "_";
   }
-  tries = 8;
+  tries = 10;
   displayTries.textContent = tries.toString();
   lettersGuessed = [];
   displayGuessTag.textContent = guess;
@@ -82,6 +100,8 @@ document.onkeyup = function(event) {
       //selectedKey = ""; // I can either change this to a !not and include the rest of the function in here, or leave as is.
     }
     for (var i = 0; i < pickedWord.length; i++) {
+      if (i === 0) selectedKey = selectedKey.toUpperCase();
+      else selectedKey = selectedKey.toLowerCase();
       if (selectedKey == pickedWord[i]) {
         guess = replaceChar(guess, i, selectedKey);
       } else {

@@ -12,24 +12,36 @@
 </head>
 
 <body>
-    <div>
-        <header><h1>Word Match Game</h1></header>
-        <div id ="body">
+    <div class="jumbotron">
+        <div id="center">            
+            <div id="height"><h1>Word Match Game</h1></div>
+        </div>
+    </div>
+    <div id ="rules">
             <div id="rulesH2"><h2>Rules</h2></div>
             <div id="rulesList"><ul>
-                <li><p>Press the Button below to begin the game.</p></li>
                 <li><p>Use the keyboard to guess letters within the word.</p></li>
-                <li><p>You have eight tries.</p></li>
+                <li><p>No need to use shift or caps lock to capitalize letters</p></li>
+                <li><p>You have ten tries.</p></li>
             </ul></div>
             <div id="button"></div>
         </div>
-        <div id="middle">
+        <div id="guessBoard">
             <p id="displayGuess"></p>
             <p id="wordUsed"></p>
-            <p id="displayTries"></p>
-            <p>Tries: <span id="lettersUsed"></span></p>
+            <p>Tries: <span id="displayTries">_</span></p>
+            <p>Letters Used: <span id="lettersUsed"></span></p>
         </div>
     </div>
+    <footer class="footer text-light bg-dark mt-auto py-3">
+        <div class="container">
+            <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"><small>Copyright &copy; 2019</small></div>
+            <div class="col-4"></div>
+            </div>
+        </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
