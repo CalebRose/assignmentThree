@@ -43,24 +43,30 @@ var displayGuessTag = document.getElementById("displayGuess");
 var wordUsed = document.getElementById("wordUsed");
 var displayTries = document.getElementById("displayTries");
 var displayLetters = document.getElementById("lettersUsed");
+var hint = document.getElementById("hint");
+var messagePrompt = document.getElementById("messagePrompt");
+var displayMessage = document.getElementById("message");
 var wordsArray = [
-  "Austin",
-  "Barcelona",
-  "Berlin",
-  "Beijing",
-  "Moscow",
-  "Paris",
-  "London",
-  "Minneapolis",
-  "Chicago",
-
-  "Toronto",
-  "Tokyo",
-  "Vienna",
-  "Istanbul",
-
-  "Seoul",
-  "Waco"
+  "AUSTIN",
+  "BARCELONA",
+  "BERLIN",
+  "BEIJING",
+  "CHICAGO",
+  "ISTANBUL",
+  "LOS ANGELES",
+  "LONDON",
+  "MINNEAPOLIS",
+  "MOSCOW",
+  "NEW YORK",
+  "PARIS",
+  "PORTLAND",
+  "SAN FRANCISCO",
+  "SEATTLE",
+  "SEOUL",
+  "TOKYO",
+  "TORONTO",
+  "VIENNA",
+  "WACO"
 ];
 var pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
 var guess = "";
@@ -82,6 +88,7 @@ function setUpGame() {
   lettersGuessed = [];
   displayGuessTag.textContent = guess;
   displayLetters.textContent = lettersGuessed;
+  hint.textContent = selectHint(pickedWord);
 }
 
 function replaceChar(str, index, chr) {
@@ -91,9 +98,76 @@ function replaceChar(str, index, chr) {
   return str;
 }
 
-document.onkeyup = function(event) {
+function selectHint(str) {
+  // Switch case to determine hint
+  switch (str) {
+    case "AUSTIN":
+      str = "The Live Music Capital of the World";
+      break;
+    case "BARCELONA":
+      str = "I am regarded as the City of Counts";
+      break;
+    case "BERLIN":
+      str = "Once separate, I was reunified in 1990";
+      break;
+    case "BEIJING":
+      str = "Formerly romanized as 'Peking'";
+      break;
+    case "CHICAGO":
+      str = "The Windiest City in the Midwest";
+      break;
+    case "ISTANBUL":
+      str = "This city is geographically located in both Europe and Asia";
+      break;
+    case "LOS ANGELES":
+      str = "The city of Angels";
+      break;
+    case "LONDON":
+      str = "Fair lady, my bridge keeps falling down";
+      break;
+    case "MINNEAPOLIS":
+      str = "A miniature apple to the eye";
+      break;
+    case "MOSCOW":
+      str = "My fortress stands upon a red square";
+      break;
+    case "NEW YORK":
+      str = "I am the City that doesn't sleep";
+      break;
+    case "PARIS":
+      str = "I am sometimes known as the City of Light";
+      break;
+    case "PORTLAND":
+      str = "The Dream of the Nineties is Alive in...";
+      break;
+    case "SAN FRANCISCO":
+      str = "I am the heart of the Silicon Valley";
+      break;
+    case "SEATTLE":
+      str = "I am sometimes known as the Emerald City";
+      break;
+    case "SEOUL":
+      str = "I am twise as dense as New York, but that is not what makes me Special.";
+      break;
+    case "TOKYO":
+      str = "In another period of time, I was Edo";
+      break;
+    case "TORONTO":
+      str = "I'm often mistaken as the capital of my country, eh?";
+      break;
+    case "VIENNA":
+      str = "I am regarded as the City of Music";
+      break;
+    case "WACO":
+      str = "Sic 'Em Bears!";
+      break;
+  }
+  return str;
+}
+
+document.onkeyup = function (event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
-    selectedKey = event.key;
+    selectedKey = event.key.toUpperCase();
     if (lettersGuessed.includes(selectedKey)) {
       console.log(
         "You cannot send " + selectedKey + " because it has already been used"
@@ -102,8 +176,7 @@ document.onkeyup = function(event) {
       //selectedKey = ""; // I can either change this to a !not and include the rest of the function in here, or leave as is.
     }
     for (var i = 0; i < pickedWord.length; i++) {
-      if (i === 0) selectedKey = selectedKey.toUpperCase();
-      else selectedKey = selectedKey.toLowerCase();
+      //selectedKey = selectedKey.toUpperCase();
       if (selectedKey == pickedWord[i]) {
         guess = replaceChar(guess, i, selectedKey);
       } else {
@@ -121,8 +194,10 @@ document.onkeyup = function(event) {
     }
     displayLetters.textContent = lettersGuessed.toString();
     if (guess === pickedWord) {
+      messagePrompt.style.display = "block";
       winCondition();
     } else if (tries === 0) {
+      messagePrompt.style.display = "block";
       loseCondition();
     }
   }
@@ -130,10 +205,13 @@ document.onkeyup = function(event) {
 
 function winCondition() {
   document.onkeyup = null;
+  displayMessage.textContent = "Congratulations, you won! Refresh the page to play again.";
   // guess == pickedWord
   // congrats you won!
 }
 
 function loseCondition() {
   document.onkeyup = null;
+  displayMessage.textContent = "I'm sorry, but you lose. Refresh the page to play again.";
+
 }

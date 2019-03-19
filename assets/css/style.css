@@ -46,6 +46,17 @@
     padding-top: 10px;
 }
 
+#messagePrompt {
+    display: none;
+    width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
 #displayGuess {
     letter-spacing: 2px;
     word-spacing: 5px;

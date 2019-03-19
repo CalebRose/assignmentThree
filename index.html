@@ -14,17 +14,21 @@
 <body>
     <div class="jumbotron">
         <div id="center">            
-            <div id="height"><h1>Word Match Game</h1></div>
+            <div id="height"><h1>Word Match: Cities</h1></div>
         </div>
     </div>
     <div id ="rules">
-            <div id="rulesH2"><h2>Rules</h2></div>
+        <div id="rulesH2"><h2>Rules</h2></div>
             <div id="rulesList"><ul>
-                <li><p>Use the keyboard to guess letters within the word.</p></li>
-                <li><p>No need to use shift or caps lock to capitalize letters</p></li>
-                <li><p>You have ten tries.</p></li>
+                <li><p>Use the keyboard to guess letters within the word. No need for shift or caps lock.</p></li>
+                <li><p>Use the hint below to guess the name of the city.</p></li>
+                <li><p id="hint"></p></li>
+                <li><p>You have 10 tries. Good luck.</p></li>
             </ul></div>
-            <div id="button"></div>
+        </div>
+        <div id="messagePrompt"><h3 id="message"></h3>
+        </div>
+            
         </div>
         <div id="guessBoard">
             <p id="displayGuess"></p>
