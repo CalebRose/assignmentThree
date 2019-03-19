@@ -129,7 +129,7 @@ function selectHint(str) {
       str = "A miniature apple to the eye";
       break;
     case "MOSCOW":
-      str = "My fortress Stands Upon a Red Square";
+      str = "My fortress stands upon a Red Square";
       break;
     case "NEW YORK":
       str = "I am the City that Doesn't Sleep";
@@ -138,7 +138,7 @@ function selectHint(str) {
       str = "I am sometimes known as the City of Light";
       break;
     case "PORTLAND":
-      str = "The Dream of the Nineties is Alive in...";
+      str = "The Dream of the 90s is alive in...";
       break;
     case "SAN FRANCISCO":
       str = "I am the heart of the Silicon Valley";
@@ -147,7 +147,7 @@ function selectHint(str) {
       str = "I am sometimes known as the Emerald City";
       break;
     case "SEOUL":
-      str = "I am twise as dense as New York, but that is not what makes me Special";
+      str = "I am twise as dense as New York, but that is not what makes me 'Special'";
       break;
     case "TOKYO":
       str = "In another period of time, I was Edo";
