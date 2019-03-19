@@ -120,25 +120,25 @@ function selectHint(str) {
       str = "This city is geographically located in both Europe and Asia";
       break;
     case "LOS ANGELES":
-      str = "The city of Angels";
+      str = "The City of Angels";
       break;
     case "LONDON":
-      str = "Fair lady, my bridge keeps falling down";
+      str = "Things have cleared up, but I was once known as The Smoke";
       break;
     case "MINNEAPOLIS":
       str = "A miniature apple to the eye";
       break;
     case "MOSCOW":
-      str = "My fortress stands upon a red square";
+      str = "My fortress stands upon a Red Square";
       break;
     case "NEW YORK":
-      str = "I am the City that doesn't sleep";
+      str = "I am the City that Doesn't Sleep";
       break;
     case "PARIS":
       str = "I am sometimes known as the City of Light";
       break;
     case "PORTLAND":
-      str = "The Dream of the Nineties is Alive in...";
+      str = "The Dream of the 90s is alive in...";
       break;
     case "SAN FRANCISCO":
       str = "I am the heart of the Silicon Valley";
@@ -147,7 +147,7 @@ function selectHint(str) {
       str = "I am sometimes known as the Emerald City";
       break;
     case "SEOUL":
-      str = "I am twise as dense as New York, but that is not what makes me Special.";
+      str = "I am twise as dense as New York, but that is not what makes me 'Special'";
       break;
     case "TOKYO":
       str = "In another period of time, I was Edo";
