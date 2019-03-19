@@ -45,18 +45,20 @@ var displayTries = document.getElementById("displayTries");
 var displayLetters = document.getElementById("lettersUsed");
 var wordsArray = [
   "Austin",
+  "Barcelona",
+  "Berlin",
+  "Beijing",
   "Moscow",
   "Paris",
   "London",
   "Minneapolis",
   "Chicago",
-  "Barcelona",
-  "Berlin",
+
   "Toronto",
   "Tokyo",
   "Vienna",
   "Istanbul",
-  "Beijing",
+
   "Seoul",
   "Waco"
 ];
@@ -120,15 +122,18 @@ document.onkeyup = function(event) {
     displayLetters.textContent = lettersGuessed.toString();
     if (guess === pickedWord) {
       winCondition();
-    } else {
+    } else if (tries === 0) {
       loseCondition();
     }
   }
 };
 
 function winCondition() {
+  document.onkeyup = null;
   // guess == pickedWord
   // congrats you won!
 }
 
-function loseCondition() {}
+function loseCondition() {
+  document.onkeyup = null;
+}
