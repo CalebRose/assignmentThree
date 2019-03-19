@@ -1,0 +1,72 @@
+.jumbotron {
+    background: url("../images/austin.jpg") no-repeat;
+    background-size: cover;
+}
+
+#center {
+    height: 250px;
+
+}
+
+#height {
+    margin: 0;
+    text-align: center;
+    padding-top: 5em;
+
+}
+
+#height h1 {
+    display: inline;
+    background: rgba(11, 11, 11, 0.8);
+    color: white;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#rules {
+    display: block;
+    width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#guessBoard {
+    display: block;
+    border: 1px solid black;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+#messagePrompt {
+    display: none;
+    width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#displayGuess {
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+#rulesList {
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+}
