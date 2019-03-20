@@ -68,27 +68,30 @@ var wordsArray = [
   "VIENNA",
   "WACO"
 ];
-var pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
-var guess = "";
+var pickedWord = "";
+var guess;
 var tries = 0;
 var lettersGuessed = [];
 var guessCounter = 0;
 let selectedKey = "";
+var lastWord = "";
 
 setUpGame();
 
 function setUpGame() {
+  guess = "";
+  pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
   for (var i = 0; i < pickedWord.length; i++) {
     if (pickedWord[i] == " ") {
       guess += " ";
     } else guess += "_";
   }
-  tries = 10;
+  tries = 5;
   displayTries.textContent = tries.toString();
   lettersGuessed = [];
   displayGuessTag.textContent = guess;
   displayLetters.textContent = lettersGuessed;
-  hint.textContent = selectHint(pickedWord);
+  hint.textContent = "Hint: " + selectHint(pickedWord);
 }
 
 function replaceChar(str, index, chr) {
@@ -195,13 +198,23 @@ document.onkeyup = function (event) {
     displayLetters.textContent = lettersGuessed.toString();
     if (guess === pickedWord) {
       messagePrompt.style.display = "block";
-      winCondition();
-    } else if (tries === 0) {
-      messagePrompt.style.display = "block";
-      loseCondition();
+      removeWordFromArray();
+      if (wordsArray.length === 0) {
+        winCondition();
+      } else if (tries === 0) {
+        loseCondition();
+      } else
+        setUpGame();
     }
   }
 };
+
+function removeWordFromArray() {
+  lastWord = pickedWord;
+  displayMessage.textContent = "Last word: " + lastWord;
+  wordsArray = wordsArray.filter(e => e !== pickedWord);
+
+}
 
 function winCondition() {
   document.onkeyup = null;
