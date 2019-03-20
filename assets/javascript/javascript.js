@@ -40,7 +40,7 @@
 */
 
 var displayGuessTag = document.getElementById("displayGuess");
-var wordUsed = document.getElementById("wordUsed");
+var alreadyGuessed = document.getElementById("alreadyGuess");
 var displayTries = document.getElementById("displayTries");
 var displayLetters = document.getElementById("lettersUsed");
 var hint = document.getElementById("hint");
@@ -68,6 +68,28 @@ var wordsArray = [
   "VIENNA",
   "WACO"
 ];
+var hintMessage = {
+  "AUSTIN": "The Live Music Capital of the World",
+  "BARCELONA": "I am regarded as the City of Counts",
+  "BERLIN": "Once separate, I was reunified in 1990",
+  "BEIJING": "Formerly romanized as 'Peking'",
+  "CHICAGO": "The Windiest City in the Midwest",
+  "ISTANBUL": "This city is geographically located in both Europe and Asia",
+  "LOS ANGELES": "The City of Angels",
+  "LONDON": "Things have cleared up, but I was once known as The Smoke",
+  "MINNEAPOLIS": "A miniature apple to the eye",
+  "MOSCOW": "My fortress stands upon a Red Square",
+  "NEW YORK": "I am the City that Doesn't Sleep",
+  "PARIS": "I am sometimes known as the City of Light",
+  "PORTLAND": "The Dream of the 90s is alive in...",
+  "SAN FRANCISCO": "I am the heart of the Silicon Valley",
+  "SEATTLE": "I am sometimes known as the Emerald City",
+  "SEOUL": "I am twise as dense as New York, but that is not what makes me 'Special'",
+  "TOKYO": "In another period of time, I was Edo",
+  "TORONTO": "I'm often mistaken as the capital of my country, eh?",
+  "VIENNA": "I am regarded as the City of Music",
+  "WACO": "Sic 'Em Bears!"
+}
 var pickedWord = "";
 var guess;
 var tries = 0;
@@ -91,7 +113,8 @@ function setUpGame() {
   lettersGuessed = [];
   displayGuessTag.textContent = guess;
   displayLetters.textContent = lettersGuessed;
-  hint.textContent = "Hint: " + selectHint(pickedWord);
+  hint.textContent = "Hint: " + hintMessage[pickedWord];
+  alreadyGuessed.textContent = "";
 }
 
 function replaceChar(str, index, chr) {
@@ -101,80 +124,11 @@ function replaceChar(str, index, chr) {
   return str;
 }
 
-function selectHint(str) {
-  // Switch case to determine hint
-  switch (str) {
-    case "AUSTIN":
-      str = "The Live Music Capital of the World";
-      break;
-    case "BARCELONA":
-      str = "I am regarded as the City of Counts";
-      break;
-    case "BERLIN":
-      str = "Once separate, I was reunified in 1990";
-      break;
-    case "BEIJING":
-      str = "Formerly romanized as 'Peking'";
-      break;
-    case "CHICAGO":
-      str = "The Windiest City in the Midwest";
-      break;
-    case "ISTANBUL":
-      str = "This city is geographically located in both Europe and Asia";
-      break;
-    case "LOS ANGELES":
-      str = "The City of Angels";
-      break;
-    case "LONDON":
-      str = "Things have cleared up, but I was once known as The Smoke";
-      break;
-    case "MINNEAPOLIS":
-      str = "A miniature apple to the eye";
-      break;
-    case "MOSCOW":
-      str = "My fortress stands upon a Red Square";
-      break;
-    case "NEW YORK":
-      str = "I am the City that Doesn't Sleep";
-      break;
-    case "PARIS":
-      str = "I am sometimes known as the City of Light";
-      break;
-    case "PORTLAND":
-      str = "The Dream of the 90s is alive in...";
-      break;
-    case "SAN FRANCISCO":
-      str = "I am the heart of the Silicon Valley";
-      break;
-    case "SEATTLE":
-      str = "I am sometimes known as the Emerald City";
-      break;
-    case "SEOUL":
-      str = "I am twise as dense as New York, but that is not what makes me 'Special'";
-      break;
-    case "TOKYO":
-      str = "In another period of time, I was Edo";
-      break;
-    case "TORONTO":
-      str = "I'm often mistaken as the capital of my country, eh?";
-      break;
-    case "VIENNA":
-      str = "I am regarded as the City of Music";
-      break;
-    case "WACO":
-      str = "Sic 'Em Bears!";
-      break;
-  }
-  return str;
-}
-
 document.onkeyup = function (event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
     selectedKey = event.key.toUpperCase();
     if (lettersGuessed.includes(selectedKey)) {
-      console.log(
-        "You cannot send " + selectedKey + " because it has already been used"
-      );
+      alreadyGuessed.textContent = "You cannot send " + selectedKey + " because it has already been used.";
       return;
       //selectedKey = ""; // I can either change this to a !not and include the rest of the function in here, or leave as is.
     }
