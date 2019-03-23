@@ -69,27 +69,28 @@ var wordsArray = [
   "WACO"
 ];
 var hintMessage = {
-  "AUSTIN": "The Live Music Capital of the World",
-  "BARCELONA": "I am regarded as the City of Counts",
-  "BERLIN": "Once separate, I was reunified in 1990",
-  "BEIJING": "Formerly romanized as 'Peking'",
-  "CHICAGO": "The Windiest City in the Midwest",
-  "ISTANBUL": "This city is geographically located in both Europe and Asia",
+  AUSTIN: "The Live Music Capital of the World",
+  BARCELONA: "I am regarded as the City of Counts",
+  BERLIN: "Once separate, I was reunified in 1990",
+  BEIJING: "Formerly romanized as 'Peking'",
+  CHICAGO: "The Windiest City in the Midwest",
+  ISTANBUL: "This city is geographically located in both Europe and Asia",
   "LOS ANGELES": "The City of Angels",
-  "LONDON": "Things have cleared up, but I was once known as The Smoke",
-  "MINNEAPOLIS": "A miniature apple to the eye",
-  "MOSCOW": "My fortress stands upon a Red Square",
+  LONDON: "Things have cleared up, but I was once known as The Smoke",
+  MINNEAPOLIS: "A miniature apple to the eye",
+  MOSCOW: "My fortress stands upon a Red Square",
   "NEW YORK": "I am the City that Doesn't Sleep",
-  "PARIS": "I am sometimes known as the City of Light",
-  "PORTLAND": "The Dream of the 90s is alive in...",
+  PARIS: "I am sometimes known as the City of Light",
+  PORTLAND: "The Dream of the 90s is alive in...",
   "SAN FRANCISCO": "I am the heart of the Silicon Valley",
-  "SEATTLE": "I am sometimes known as the Emerald City",
-  "SEOUL": "I am twise as dense as New York, but that is not what makes me 'Special'",
-  "TOKYO": "In another period of time, I was Edo",
-  "TORONTO": "I'm often mistaken as the capital of my country, eh?",
-  "VIENNA": "I am regarded as the City of Music",
-  "WACO": "Sic 'Em Bears!"
-}
+  SEATTLE: "I am sometimes known as the Emerald City",
+  SEOUL:
+    "I am twise as dense as New York, but that is not what makes me 'Special'",
+  TOKYO: "In another period of time, I was Edo",
+  TORONTO: "I'm often mistaken as the capital of my country, eh?",
+  VIENNA: "I am regarded as the City of Music",
+  WACO: "Sic 'Em Bears!"
+};
 var pickedWord = "";
 var guess;
 var tries = 0;
@@ -124,11 +125,12 @@ function replaceChar(str, index, chr) {
   return str;
 }
 
-document.onkeyup = function (event) {
+document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
     selectedKey = event.key.toUpperCase();
     if (lettersGuessed.includes(selectedKey)) {
-      alreadyGuessed.textContent = "You cannot send " + selectedKey + " because it has already been used.";
+      alreadyGuessed.textContent =
+        "You cannot send " + selectedKey + " because it has already been used.";
       return;
       //selectedKey = ""; // I can either change this to a !not and include the rest of the function in here, or leave as is.
     }
@@ -140,6 +142,9 @@ document.onkeyup = function (event) {
         guessCounter++;
         if (guessCounter == pickedWord.length) {
           tries--;
+          if (tries === 0) {
+            loseCondition();
+          }
         }
       }
     }
@@ -155,10 +160,7 @@ document.onkeyup = function (event) {
       removeWordFromArray();
       if (wordsArray.length === 0) {
         winCondition();
-      } else if (tries === 0) {
-        loseCondition();
-      } else
-        setUpGame();
+      } else setUpGame();
     }
   }
 };
@@ -167,18 +169,19 @@ function removeWordFromArray() {
   lastWord = pickedWord;
   displayMessage.textContent = "Last word: " + lastWord;
   wordsArray = wordsArray.filter(e => e !== pickedWord);
-
 }
 
 function winCondition() {
   document.onkeyup = null;
-  displayMessage.textContent = "Congratulations, you won! Refresh the page to play again.";
+  displayMessage.textContent =
+    "Congratulations, you won! Refresh the page to play again.";
   // guess == pickedWord
   // congrats you won!
 }
 
 function loseCondition() {
   document.onkeyup = null;
-  displayMessage.textContent = "I'm sorry, but you lose. Refresh the page to play again.";
-
+  messagePrompt.style.display = "block";
+  displayMessage.textContent =
+    "I'm sorry, but you lose. Refresh the page to play again.";
 }
