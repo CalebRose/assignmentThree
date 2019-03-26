@@ -46,51 +46,8 @@ var displayLetters = document.getElementById("lettersUsed");
 var hint = document.getElementById("hint");
 var messagePrompt = document.getElementById("messagePrompt");
 var displayMessage = document.getElementById("message");
-var wordsArray = [
-  "AUSTIN",
-  "BARCELONA",
-  "BERLIN",
-  "BEIJING",
-  "CHICAGO",
-  "ISTANBUL",
-  "LOS ANGELES",
-  "LONDON",
-  "MINNEAPOLIS",
-  "MOSCOW",
-  "NEW YORK",
-  "PARIS",
-  "PORTLAND",
-  "SAN FRANCISCO",
-  "SEATTLE",
-  "SEOUL",
-  "TOKYO",
-  "TORONTO",
-  "VIENNA",
-  "WACO"
-];
-var hintMessage = {
-  AUSTIN: "The Live Music Capital of the World",
-  BARCELONA: "I am regarded as the City of Counts",
-  BERLIN: "Once separate, I was reunified in 1990",
-  BEIJING: "Formerly romanized as 'Peking'",
-  CHICAGO: "The Windiest City in the Midwest",
-  ISTANBUL: "This city is geographically located in both Europe and Asia",
-  "LOS ANGELES": "The City of Angels",
-  LONDON: "Things have cleared up, but I was once known as The Smoke",
-  MINNEAPOLIS: "A miniature apple to the eye",
-  MOSCOW: "My fortress stands upon a Red Square",
-  "NEW YORK": "I am the City that Doesn't Sleep",
-  PARIS: "I am sometimes known as the City of Light",
-  PORTLAND: "The Dream of the 90s is alive in...",
-  "SAN FRANCISCO": "I am the heart of the Silicon Valley",
-  SEATTLE: "I am sometimes known as the Emerald City",
-  SEOUL:
-    "I am twise as dense as New York, but that is not what makes me 'Special'",
-  TOKYO: "In another period of time, I was Edo",
-  TORONTO: "I'm often mistaken as the capital of my country, eh?",
-  VIENNA: "I am regarded as the City of Music",
-  WACO: "Sic 'Em Bears!"
-};
+var wordsArray = [];
+var hintMessage = {};
 var pickedWord = "";
 var guess;
 var tries = 0;
@@ -98,10 +55,59 @@ var lettersGuessed = [];
 var guessCounter = 0;
 let selectedKey = "";
 var lastWord = "";
+var reset = true;
 
 setUpGame();
 
 function setUpGame() {
+  if (reset) {
+    wordsArray = [
+      "AUSTIN",
+      "BARCELONA",
+      "BERLIN",
+      "BEIJING",
+      "CHICAGO",
+      "ISTANBUL",
+      "LOS ANGELES",
+      "LONDON",
+      "MINNEAPOLIS",
+      "MOSCOW",
+      "NEW YORK",
+      "PARIS",
+      "PORTLAND",
+      "SAN FRANCISCO",
+      "SEATTLE",
+      "SEOUL",
+      "TOKYO",
+      "TORONTO",
+      "VIENNA",
+      "WACO"
+    ];
+    hintMessage = {
+      AUSTIN: "The Live Music Capital of the World",
+      BARCELONA: "I am regarded as the City of Counts",
+      BERLIN: "Once separate, I was reunified in 1990",
+      BEIJING: "Formerly romanized as 'Peking'",
+      CHICAGO: "The Windiest City in the Midwest",
+      ISTANBUL: "This city is geographically located in both Europe and Asia",
+      "LOS ANGELES": "The City of Angels",
+      LONDON: "Things have cleared up, but I was once known as The Smoke",
+      MINNEAPOLIS: "A miniature apple to the eye",
+      MOSCOW: "My fortress stands upon a Red Square",
+      "NEW YORK": "I am the City that Doesn't Sleep",
+      PARIS: "I am sometimes known as the City of Light",
+      PORTLAND: "The Dream of the 90s is alive in...",
+      "SAN FRANCISCO": "I am the heart of the Silicon Valley",
+      SEATTLE: "I am sometimes known as the Emerald City",
+      SEOUL:
+        "I am twise as dense as New York, but that is not what makes me 'Special'",
+      TOKYO: "In another period of time, I was Edo",
+      TORONTO: "I'm often mistaken as the capital of my country, eh?",
+      VIENNA: "I am regarded as the City of Music",
+      WACO: "Sic 'Em Bears!"
+    };
+    reset = false;
+  }
   guess = "";
   pickedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
   for (var i = 0; i < pickedWord.length; i++) {
@@ -134,8 +140,12 @@ document.onkeyup = function(event) {
       return;
       //selectedKey = ""; // I can either change this to a !not and include the rest of the function in here, or leave as is.
     }
+    if (!lettersGuessed.includes(selectedKey)) {
+      lettersGuessed.push(selectedKey);
+    }
     for (var i = 0; i < pickedWord.length; i++) {
       //selectedKey = selectedKey.toUpperCase();
+
       if (selectedKey == pickedWord[i]) {
         guess = replaceChar(guess, i, selectedKey);
       } else {
@@ -151,14 +161,12 @@ document.onkeyup = function(event) {
     guessCounter = 0;
     displayGuessTag.textContent = guess;
     displayTries.textContent = tries.toString();
-    if (!lettersGuessed.includes(selectedKey)) {
-      lettersGuessed.push(selectedKey);
-    }
+
     displayLetters.textContent = lettersGuessed.toString();
     if (guess === pickedWord) {
       messagePrompt.style.display = "block";
       removeWordFromArray();
-      if (wordsArray.length === 0) {
+      if (wordsArray.length <= 0) {
         winCondition();
       } else setUpGame();
     }
@@ -172,16 +180,15 @@ function removeWordFromArray() {
 }
 
 function winCondition() {
-  document.onkeyup = null;
   displayMessage.textContent =
-    "Congratulations, you won! Refresh the page to play again.";
-  // guess == pickedWord
-  // congrats you won!
+    "Congratulations, you won! Type below to play again.";
+  reset = true;
+  setUpGame();
 }
 
 function loseCondition() {
-  document.onkeyup = null;
   messagePrompt.style.display = "block";
-  displayMessage.textContent =
-    "I'm sorry, but you lose. Refresh the page to play again.";
+  displayMessage.textContent = "I'm sorry, but you lose. Please try again.";
+  reset = true;
+  setUpGame();
 }
